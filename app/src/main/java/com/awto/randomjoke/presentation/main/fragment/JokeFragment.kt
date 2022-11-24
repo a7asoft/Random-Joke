@@ -53,7 +53,7 @@ class JokeFragment : Fragment() {
     ): View {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         //Network state observe
-        NetworkStateManager.getInstance().networkConnectivityStatus
+        NetworkStateManager.instance.networkConnectivityStatus
             .observe(viewLifecycleOwner, activeNetworkStateObserver)
         return binding.root
     }
