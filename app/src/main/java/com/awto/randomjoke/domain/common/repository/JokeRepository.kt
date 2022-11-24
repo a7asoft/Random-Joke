@@ -6,5 +6,5 @@ import com.awto.randomjoke.util.BaseResult
 import kotlinx.coroutines.flow.Flow
 
 interface JokeRepository {
-    suspend fun getJoke(): Flow<BaseResult<JokeResponseModel, ErrorModel>>
+    suspend fun getJoke(): Flow<BaseResult<JokeResponseModel, ErrorModel, Exception>>
 }

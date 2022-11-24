@@ -2,8 +2,21 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.RandomJoke" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- <item name="colorPrimary">@color/colorPrimary</item>-->
     </style>
 
     <style name="Theme.RandomJoke" parent="Base.Theme.RandomJoke" />
+
+    <style name="Theme.AppSplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="iconSize">24dp</item>
+        <item name="postSplashScreenTheme">@style/Theme.RandomJoke</item>
+
+        <!-- Status bar and Nav bar configs -->
+        <item name="android:statusBarColor" >@color/white</item>
+        <item name="android:navigationBarColor">@color/white</item>
+    </style>
+
 </resources>

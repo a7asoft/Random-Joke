@@ -44,4 +44,14 @@
     </string>
     <string name="twopart">twopart</string>
     <string name="single">single</string>
+    <string name="nsfw">nsfw</string>
+    <string name="explicit">explicit</string>
+    <string name="racist">racist</string>
+    <string name="political">political</string>
+    <string name="sexist">sexist</string>
+    <string name="religious">religious</string>
+    <string name="no_connection_title">You have no connection</string>
+    <string name="no_connection_subtitle">Please connect to a network with internet connection</string>
+    <string name="retry">Retry</string>
+    <string name="fab_next_joke">fab_next_joke</string>
 </resources>

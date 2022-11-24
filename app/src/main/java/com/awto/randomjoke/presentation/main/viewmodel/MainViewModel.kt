@@ -1,6 +1,5 @@
 package com.awto.randomjoke.presentation.main.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.awto.randomjoke.data.remote.model.ErrorModel
@@ -48,6 +47,10 @@ class MainViewModel @Inject constructor(
         stateJoke.value = JokesState.ShowError(error)
     }
 
+    private fun showException(error: Exception) {
+        stateJoke.value = JokesState.ShowException(error)
+    }
+
     fun getRandomJoke() {
         viewModelScope.launch {
             getRandomJokeUseCase.invoke()
@@ -56,6 +59,7 @@ class MainViewModel @Inject constructor(
                 }
                 .catch {
                     hideLoading()
+                    showException(it as Exception)
                 }
                 .collect { result ->
                     hideLoading()
@@ -65,6 +69,9 @@ class MainViewModel @Inject constructor(
                         }
                         is BaseResult.Error -> {
                             showError(result.rawResponse)
+                        }
+                        is BaseResult.Exception -> {
+                            showException(result.exception)
                         }
                     }
                 }
@@ -77,4 +84,5 @@ sealed class JokesState {
     object Init : JokesState()
     data class IsLoading(val isLoading: Boolean) : JokesState()
     data class ShowError(val error: ErrorModel) : JokesState()
+    data class ShowException(val error: Exception) : JokesState()
 }
