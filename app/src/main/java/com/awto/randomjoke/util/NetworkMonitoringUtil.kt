@@ -22,7 +22,7 @@ class NetworkMonitoringUtil(context: Context) : NetworkCallback() {
     init {
         mConnectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        mNetworkStateManager = NetworkStateManager.instance
+        mNetworkStateManager = NetworkStateManager.instance!!
     }
 
     override fun onAvailable(network: Network) {
