@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/signal_wifi_statusbar_connected_no_internet_4/baseline_signal_wifi_statusbar_connected_no_internet_4_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/share/baseline_share_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_signal_wifi_statusbar_connected_no_internet_4_24" />
+                            <entry key="outputName" value="ic_baseline_share_24" />
                           </map>
                         </option>
                       </PersistentState>
