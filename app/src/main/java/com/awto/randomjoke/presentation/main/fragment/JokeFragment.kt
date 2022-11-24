@@ -1,14 +1,13 @@
-package com.awto.randomjoke
+package com.awto.randomjoke.presentation.main.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.awto.randomjoke.databinding.FragmentFirstBinding
 
-class FirstFragment : Fragment() {
+class JokeFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
 

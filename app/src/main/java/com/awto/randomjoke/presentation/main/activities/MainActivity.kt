@@ -1,4 +1,4 @@
-package com.awto.randomjoke
+package com.awto.randomjoke.presentation.main.activities
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -8,8 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
+import com.awto.randomjoke.R
 import com.awto.randomjoke.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
