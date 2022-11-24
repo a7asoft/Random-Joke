@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetRandomJokeUseCase @Inject constructor(private val jokeRepository: JokeRepository){
-    suspend fun invoke(): Flow<BaseResult<JokeResponseModel, ErrorModel, Exception>> {
+    suspend operator fun invoke(): Flow<BaseResult<JokeResponseModel, ErrorModel, Exception>> {
         return jokeRepository.getJoke()
     }
 }

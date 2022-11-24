@@ -1,11 +1,11 @@
 package com.awto.randomjoke.data.remote.model
 
 data class ErrorModel (
-    val error: Boolean,
-    val internalError: Boolean,
-    val code: Long,
-    val message: String,
-    val causedBy: List<String>,
-    val additionalInfo: String,
-    val timestamp: Long
+    val error: Boolean? = false,
+    val internalError: Boolean? = false,
+    val code: Long? = -1,
+    val message: String? = "",
+    val causedBy: List<String>? = emptyList(),
+    val additionalInfo: String? = "",
+    val timestamp: Long? = -1
 )

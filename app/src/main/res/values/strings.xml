@@ -54,4 +54,6 @@
     <string name="no_connection_subtitle">Please connect to a network with internet connection</string>
     <string name="retry">Retry</string>
     <string name="fab_next_joke">fab_next_joke</string>
+    <string name="share_subject">Share this joke with a friend</string>
+    <string name="share_using">Share using</string>
 </resources>

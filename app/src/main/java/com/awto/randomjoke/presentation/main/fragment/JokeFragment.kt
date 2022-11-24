@@ -1,5 +1,6 @@
 package com.awto.randomjoke.presentation.main.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,8 +25,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+
 @AndroidEntryPoint
 class JokeFragment : Fragment() {
+    private var actualJoke: JokeResponseModel? = null
     private var _binding: FragmentFirstBinding? = null
     private val viewModel: MainViewModel by viewModels()
 
@@ -53,8 +56,8 @@ class JokeFragment : Fragment() {
     ): View {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         //Network state observe
-        NetworkStateManager.getInstance().networkConnectivityStatus
-            .observe(viewLifecycleOwner, activeNetworkStateObserver)
+        NetworkStateManager.instance?.networkConnectivityStatus
+            ?.observe(viewLifecycleOwner, activeNetworkStateObserver)
         return binding.root
     }
 
@@ -68,6 +71,36 @@ class JokeFragment : Fragment() {
     private fun listeners() {
         binding.fab.setOnClickListener {
             viewModel.getRandomJoke()
+        }
+
+        binding.fabShare.setOnClickListener {
+            if (actualJoke != null) {
+                val intent = Intent(Intent.ACTION_SEND)
+                var shareBody = ""
+                when (actualJoke!!.type) {
+                    getString(R.string.single) -> {
+                        shareBody = "\uD83E\uDD23\uD83E\uDD23 ${actualJoke!!.joke}"
+                    }
+                    getString(R.string.twopart) -> {
+                        //show second text
+                        shareBody = "\uD83E\uDD23\uD83E\uDD23 ${actualJoke!!.setup}\n${actualJoke!!.delivery}"
+                    }
+                }
+
+                intent.type = "text/plain"
+
+                intent.putExtra(
+                    Intent.EXTRA_SUBJECT,
+                    getString(R.string.share_subject)
+                )
+                intent.putExtra(Intent.EXTRA_TEXT, shareBody)
+                startActivity(
+                    Intent.createChooser(
+                        intent,
+                        getString(R.string.share_using)
+                    )
+                )
+            }
         }
 
         binding.btnRetry.setOnClickListener {
@@ -91,9 +124,8 @@ class JokeFragment : Fragment() {
     }
 
     private fun handleJoke(data: JokeResponseModel) {
-        if (data.error) {
-            //show error
-        } else {
+        if (!data.error) {
+            actualJoke = data
             //handle type of joke
             when (data.type) {
                 getString(R.string.single) -> {
@@ -104,18 +136,20 @@ class JokeFragment : Fragment() {
                     binding.textviewSecond.hideViewWithAnimation()
                 }
                 getString(R.string.twopart) -> {
-                    //show second text
+                    binding.textviewFirst.apply {
+                        text = data.setup
+                    }.showViewWithAnimation()
+
                     binding.textviewSecond.apply {
                         text = data.delivery
                     }.showViewWithAnimation()
 
-                    binding.textviewFirst.apply {
-                        text = data.setup
-                    }.showViewWithAnimation()
+
                 }
             }
 
             binding.fab.showViewWithAnimation()
+            binding.fabShare.showViewWithAnimation()
 
             //building Chips categories and flags dynamically
             buildChips(data, binding.chipGroup)
@@ -125,6 +159,7 @@ class JokeFragment : Fragment() {
                 isSelectionRequired = false
             }
             binding.chipGroup.showViewWithAnimation()
+
         }
     }
 
@@ -163,6 +198,7 @@ class JokeFragment : Fragment() {
         binding.textviewError.showViewWithAnimation()
         binding.constraintJokes.hideViewWithAnimation()
         binding.fab.hideViewWithAnimation()
+        binding.fabShare.hideViewWithAnimation()
         binding.chipGroup.hideViewWithAnimation()
     }
 
@@ -174,6 +210,7 @@ class JokeFragment : Fragment() {
             binding.textviewError.hideViewWithAnimation()
             binding.errorView.hideViewWithAnimation()
             binding.fab.hideViewWithAnimation()
+            binding.fabShare.hideViewWithAnimation()
         } else {
             binding.chipGroup.showViewWithAnimation()
             binding.constraintJokes.showViewWithAnimation()
